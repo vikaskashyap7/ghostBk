@@ -1,0 +1,52 @@
+{{!< default}} {{!-- The tag above means - insert everything in this file into the {body} of the default.hbs template
+    --}} {{!-- Insights page Featured post Section --}} {{!-- This Showes the latest featured post --}} <div
+    style="margin-top:50px">
+    </div>
+    {{!-- <div class="my-5 py-5 text-center border shadow">
+        {{#get "tags" limit="6" include="count.posts" order="count.posts desc"}}
+        {{#foreach tags}}
+        <a class="text-danger text-underline-hover" href="{{url}}" title="{{plural count.posts empty='zero posts' singular='% post' plural='% posts'}}">
+            {{name}}
+        </a>
+        {{/foreach}}
+        {{/get}}
+    </div> --}}
+    <div class="mx-4" id="featured">
+        <aside class="read-more-wrap mb-5">
+            <div class="inner">
+                {{#get "posts" filter="featured:true" include="authors" limit="1" as |more_posts| }}
+                {{featured}}
+                {{#if more_posts}}
+                {{#foreach posts}}
+                {{> "featured-post-card"}}
+                {{/foreach}}
+                {{/if}}
+                {{/get}}
+            </div>
+        </aside>
+        {{!-- //Featured post Section --}}
+        {{!--
+        <hr> --}}
+        {{!-- Insights page other posts Section --}}
+        <script src="{{asset " js/posts.js"}}" type="module"></script>
+        <aside class="read-more-wrap">
+            <div class="inner">
+                <div class="row">
+                    {{!-- {{#get "posts" filter="featured:false" limit="9" page="2" as |more_posts| }} --}}
+
+                    {{!-- {{#if more_posts}} --}}
+                    {{#foreach posts}}
+                    <div class="col-lg-4 col-md-6 offset-md-0 col-12 mt-2 mb-3">
+                        {{> "post-card"}}
+                    </div>
+                    {{/foreach}}
+                    {{!-- {{/if}} --}}
+                    {{!--
+                    <hr class="my-4"> --}}
+                    {{pagination}}
+                    {{!-- {{/get}} --}}
+                </div>
+            </div>
+        </aside>
+    </div>
+    {{!-- //Insights page other posts Section --}}

@@ -1,0 +1,97 @@
+{{!-- This is a partial file used to generate a post "card"
+which templates loop over to generate a list of posts. --}}
+
+  <article class="post-card {{post_class}} mb-lg-5">
+    <div class="row">
+      <div class="col-lg-7 col-12 bg-transparent rounded-3">
+        {{#if feature_image}}
+        <a href="{{url}}">
+          <img class="post_feature_image card-img-top post-card-image shadow"
+              srcset="{{img_url feature_image size="s"}} 300w,
+                      {{img_url feature_image size="m"}} 600w,
+                      {{img_url feature_image size="l"}} 1000w,
+                      {{img_url feature_image size="xl"}} 2000w"
+              sizes="(max-width: 1000px) 400px, 800px"
+              src="{{img_url feature_image size="l"}}"
+              alt="{{#if feature_image_alt}}{{feature_image_alt}}{{else}}{{title}}{{/if}}"
+              loading="lazy"
+          />
+        </a>
+        {{/if}}
+      </div>
+      <div class="col-lg-5 col-12 card-body p-4 p-lg-3 pb-1">
+        <div class="post-card-content">
+          <a class="post-card-content-link text-black text-decoration-none" style="text-align: justify;" href="{{url}}">
+            <header class="post-card-header">
+              {{#if primary_tag}}
+                  {{#primary_tag}}
+                  <div class="post-card-primary-tag">{{name}}</div>
+                  {{/primary_tag}}
+              {{/if}}
+              <h5 class="card-title">
+                <strong>{{title}}</strong>
+              </h5>
+            </header>
+            <p class="card-text post-card-description">{{excerpt}}</p>
+            <i class="text-danger"><b>Read More &nbsp;&nbsp;  <span class="fa-solid fa-arrow-right-long" /></b></a></b></i>
+          </a>
+          {{!-- <footer class="post-card-meta mt-2 text-right">
+            <div class="post-card-byline-content">
+              <span>
+                {{#has author="count:>1"}}Multiple authors{{else}}{{authors}}{{/has}}
+              </span>
+              <span class="post-card-byline-date"><i><time datetime="{{date format="YYYY-MM-DD"}}">{{date}}</time></i></span>
+            </div>
+          </footer> --}}
+        </div>
+      </div>
+    </div>
+  </article>
+
+{{!--
+<a class="featured-link" href="{{url}}">
+<a class="featured-post-card-content-link" href="{{url}}">
+  <article class="featured-post-card {{post_class}} {{#is "home"}}{{#if feature_image}}{{#has index="0"}}post-card-large{{/has}}{{/if}}{{/is}}">
+
+    {{#if feature_image}}
+          {{!-- This is a responsive image, it loads different sizes depending on device
+          https://medium.freecodecamp.org/a-guide-to-responsive-images-with-ready-to-use-templates-c400bd65c433 --}}
+          {{!--
+              <img class="featured-post-card-image"
+              srcset="{{img_url feature_image size="s"}} 300w,
+                      {{img_url feature_image size="m"}} 600w,
+                      {{img_url feature_image size="l"}} 1000w,
+                      {{img_url feature_image size="xl"}} 2000w"
+              sizes="(max-width: 1000px) 400px, 800px"
+              src="{{img_url feature_image size="m"}}"
+              alt="{{#if feature_image_alt}}{{feature_image_alt}}{{else}}{{title}}{{/if}}"
+              loading="lazy"
+          />
+    {{/if}}
+
+    <div class="featured-post-card-content">
+            <header class="post-card-header">
+                {{#if primary_tag}}
+                    {{#primary_tag}}
+                    <div class="post-card-primary-tag">{{name}}</div>
+                    {{/primary_tag}}
+                {{/if}}
+                <h2 class="featured-post-card-title">{{title}}</h2>
+            </header>
+            <section class="post-card-excerpt">
+                <p class="featured-post-card-excerpt-p">{{excerpt}}</p><br /><br /><a href="{{url}}" class="post-card-read-more"> Read More..</a>
+            </section>
+
+        <footer class="post-card-meta">
+            <div class="post-card-byline-content">
+                <span>{{#has author="count:>2"}}Multiple authors{{else}}{{authors}}{{/has}}</span>
+                <span class="post-card-byline-date"><br><time datetime="{{date format="YYYY-MM-DD"}}">{{date}}</time>  <span class="bull">&bull;</span> {{reading_time}}</span>
+
+            </div>
+        </footer>
+
+    </div>
+
+  </article>
+</a>
+--}}

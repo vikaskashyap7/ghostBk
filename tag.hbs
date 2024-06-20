@@ -1,0 +1,73 @@
+{{!< default}} {{!-- The tag above means - insert everything in this file into the {body} of the default.hbs template
+    --}} 
+    <section class="outer">
+    <div class="inner posts">
+        {{!-- <div>
+            <li class="nav-item mx-2 mt-2 mt-lg-0 btn-group ms-auto">
+                    <button type="button" class="btn btn-outline-danger dropdown-toggle dropstart" data-bs-toggle="dropdown"
+                        aria-expanded="false" id="lang_dropdown">
+                        {{#is "#page,insights,post,tag"}}
+                         Select Language
+                        {{else}}
+                        {{#is "tags"}}हिंदी{{else}}English {{/is}}
+                        {{/is}}
+                    </button>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item btn-red" href="/tags/flag/">English</a></li>
+                        <li><a class="dropdown-item btn-red" href="/tags/">हिंदी</a></li>
+                    </ul>
+                </li>
+        </div> --}}
+        <div class="mt-5">
+
+            {{#tag}}
+            <section class="mt-5">
+                {{#if feature_image}}
+                <div class="post-card-image-link">
+                    {{!-- This is a responsive image, it loads different sizes depending on device
+                    https://medium.freecodecamp.org/a-guide-to-responsive-images-with-ready-to-use-templates-c400bd65c433
+                    --}}
+                    <img class="post-card-image" srcset="{{img_url feature_image size=" s"}} 300w, {{img_url
+                        feature_image size="m" }} 600w, {{img_url feature_image size="l" }} 1000w, {{img_url
+                        feature_image size="xl" }} 2000w" sizes="(max-width: 1000px) 400px, 800px"
+                        src="{{img_url feature_image size=" m"}}" alt="{{title}}" loading="lazy" />
+                </div>
+                {{/if}}
+                <div class="post-card-content">
+                    <div class="post-card-content-link">
+                        <header class="post-card-header">
+                            {{!-- <div class="post-card-primary-tag">Tagged</div> --}}
+                            <h2 class="post-card-title text-danger fw-bold text-uppercase">{{name}}</h2>
+                        </header>
+                        <div class="post-card-excerpt">
+                            <p>
+                                {{#if description}}
+                                {{description}}
+                                {{else}}
+                                &bull; A collection of {{plural ../pagination.total empty='zero posts' singular='% post'
+                                plural='% posts'}}
+                                {{/if}}
+                            </p>
+                        </div>
+                    </div>
+                </div>{{!--/.post-card-content--}}
+
+            </section>
+            {{/tag}}
+
+            <div class="row"  id="postContainer">
+                {{#foreach posts }}
+
+                {{!-- The tag below includes the markup for each post - partials/post-card.hbs --}}
+                <div class="col-12 col-md-6 col-lg-4 post" data-lang="{{language}}" >
+                    {{> "post-card"}}
+                </div>
+
+                {{/foreach}}
+                {{pagination}}
+            </div>
+
+        </div>
+    </div>
+    </section>
+ 

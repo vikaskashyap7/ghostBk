@@ -1,0 +1,84 @@
+{{#if isSecondary}}
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container-fluid">
+        <a class="navbar-brand mb-auto" href="{{@site.url}}">
+            {{#if @site.logo}}
+            <img height="48" src="{{@site.logo}}" alt="{{@site.title}}" />
+            {{/if}}
+            <b>{{@site.title}}</b>
+        </a>
+
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse row" id="navbarSupportedContent">
+            <ul class="navbar-nav ms-auto w-100 mb-2">
+                {{#foreach navigation}}
+                <li class="nav-item mx-2 d-none-not-lg">
+                    <a class="small nav-link text-start ms-2 ms-lg-0 text-uppercase {{#if current}} active{{/if}}"
+                        href="{{url absolute=" true"}}" title="{{label}}">{{label}}</a>
+                </li>
+                {{/foreach}}
+                <li class="nav-item mx-2 mt-2 mt-lg-0 btn-group ms-auto">
+                    <button type="button" class="btn btn-outline-danger dropdown-toggle dropstart" data-bs-toggle="dropdown"
+                        aria-expanded="false" id="lang_dropdown">
+                        {{#is "#page,insights,post,tag"}}
+                        English
+                        {{else}}
+                        {{#is "#page,insights,post,tag"}}English{{else}}हिंदी{{/is}}
+                        {{/is}}
+                    </button>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item btn-red" href="/insights/">English</a></li>
+                        <li><a class="dropdown-item btn-red" href="/hi/insights/">हिंदी</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item mx-2 mt-2 mt-lg-0">
+                    <a target="_blank" href="https://play.google.com/store/apps/details?id=com.bahikhata"
+                        class="btn btn-danger" role="button">Download App</a>
+                </li>
+            </ul>
+            <ul class="ms-auto d-none-lg d-flex navbar-nav w-100">
+                {{#foreach navigation}}
+                <li class="nav-item mx-2">
+                    <a class="small nav-link text-start ms-2 ms-lg-0 text-uppercase text-center theactive-nav{{#if current}} active{{/if}}" href="{{url absolute=" true"}}" title="{{label}}">{{label}}</a>
+                </li>
+                {{/foreach}}
+            </ul>
+        </div>
+    </div>
+</nav>
+{{else}}
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="{{@site.url}}">
+            {{#if @site.logo}}
+            <img height="48" src="{{@site.logo}}" alt="{{@site.title}}" />
+            {{/if}}
+            <b>{{@site.title}}</b>
+        </a>
+
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav ms-auto">
+                {{#foreach navigation}}
+                <li class="nav-item mx-2">
+                    <a class="nav-link text-start ms-2 ms-lg-0 text-uppercase {{#if current}} active{{/if}}"
+                        href="{{url absolute=" true"}}" title="{{label}}">{{label}}</a>
+                </li>
+                {{/foreach}}
+                <li class="nav-item mx-2 mt-2 mt-lg-0">
+                    <a target="_blank" href="https://play.google.com/store/apps/details?id=com.bahikhata"
+                        class="btn btn-danger" role="button">Download App</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+{{/if}}

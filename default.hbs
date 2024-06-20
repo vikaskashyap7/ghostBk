@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="{{@site.locale}}">
+
+<head>
+
+    {{!-- Basic meta - advanced meta is output with {ghost_head} below --}}
+    <title>{{@site.title}}</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="HandheldFriendly" content="True" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <meta name="keywords" content="" />
+    <meta name="description"
+        content="We work on connecting the Aspirations of Bharat with opportunities available in India" />
+    <meta name="copyright" content="© 2021 All rights Reserved - Bahi Khata Inc." />
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="{{asset "css/screen.css"}}" type="text/css">
+    <link rel="stylesheet" href="{{asset "built/index.css"}}" type="text/css">
+
+    {{!-- This tag outputs all your advanced SEO meta, structured data, and other important settings,
+    it should always be the last tag before the closing head tag --}}
+    {{ghost_head}}
+
+</head>
+
+<body class="{{body_class}} font-family-opensans">
+    <div class="viewport">
+
+        <header class="header">
+            {{#is "home"}}
+                {{navigation}}
+            {{else}}
+                {{navigation type="secondary"}}
+            {{/is}}
+        </header>
+
+        <main>
+            {{{body}}}
+        </main>
+
+        <footer class="mt-auto">
+            {{> "footer"}}
+        </footer>
+    </div>
+
+
+    {{!-- Scripts - handle member signups, responsive videos, infinite scroll, floating headers, and galleries --}}
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"
+        integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"></script>
+    <script src="https://kit.fontawesome.com/297aaac7f4.js" crossorigin="anonymous"></script>
+    <script src="{{asset "built/script.js"}}"></script>
+    <script src="{{asset "js/language-switcher.js"}}"></script>
+
+    {{!-- Ghost outputs required functional scripts with this tag - it should always be the last thing before the
+    closing body tag --}}
+    {{ghost_foot}}
+
+</body>
+
+</html>

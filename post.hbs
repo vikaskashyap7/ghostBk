@@ -1,0 +1,171 @@
+{{!< default}} {{#post}}<article class="postpage {{post_class}}">
+
+    {{#if feature_image}}
+    <figure class="article-image w-100 d-flex justify-content-center">
+
+        <img class="article-img custom-rounded" srcset="{{img_url feature_image size=" s"}} 300w, {{img_url
+            feature_image size="m" }} 600w, {{img_url feature_image size="l" }} 1000w, {{img_url feature_image size="xl"
+            }} 2000w" sizes="(min-width: 1400px) 1400px, 92vw" src="{{img_url feature_image size=" xl"}}"
+            alt="{{#if feature_image_alt}}{{feature_image_alt}}{{else}}{{title}}{{/if}}" />
+
+    </figure>
+
+    <div class="post-margin">
+
+        {{/if}}
+
+        <h1 class="article-post-title font-familt-amiri text-center">
+            <b>{{title}}</b>
+        </h1>
+        <span class="d-flex justify-content-center">
+            {{#primary_author}}
+            <div class="d-flex justify-content-center">
+                {{#if profile_image}}
+                <img src="{{img_url profile_image}}" class="rounded-circle author-profile-image me-1 my-auto"
+                    alt="{{name}}'s Picture" />
+                {{else}}
+                <img src="https://icons.getbootstrap.com/assets/icons/person-circle.svg"
+                    class="rounded-circle author-profile-image me-1 my-auto" alt="{{name}}'s Picture" />
+                {{/if}}
+                <div class="font-familt-amiri fs-4">
+                    <a class="text-underline-hover text-danger" href="{{url}}">
+                        <b>{{name}}</b>
+                    </a>
+                </div>
+            </div>
+            {{/primary_author}}
+            <div class="my-auto ms-2">
+                &bull;
+                <time class="byline-meta-date font-familt-amiri my-auto" datetime="{{date format=" YYYY-MM-DD"}}">
+                    {{date published_at}}<time datetime="{{date format=" YYYY-MM-DD"}}"></time>
+                </time>
+            </div>
+        </span>
+        <div class=" d-flex justify-content-center my-2 sharethis-inline-share-buttons"></div>
+        <hr>
+
+
+        {{!-- Article Main Content Section --}}
+
+        <section class="my-3">
+            <div class="post-page-content" style="text-align: justify;">{{content}}
+            </div>
+        </section>
+
+        <script>
+            const tempArray = document.querySelectorAll('[srcset]');
+            tempArray.forEach((elem) => {
+                const aa = elem.srcset.includes("http:");
+                if (aa) {
+                    console.log("removed", elem);
+                    elem.srcset = "";
+                }
+            })
+        </script>
+
+        {{!-- End of content --}}
+
+
+        <!-- ShareThis BEGIN -->
+        <div class=" d-flex justify-content-center mb-4 sharethis-inline-share-buttons"></div>
+        <!-- ShareThis END -->
+        <!-- Comments Start -->
+        {{!-- <Section class="post-full-comments mb-md-3">
+            <div id="disqus_thread"></div>
+            <script>
+                var disqus_config = function () {
+                    this.page.url = '{{url absolute=true}}';;  // Replace PAGE_URL with your page's canonical URL variable
+                    this.page.identifier = "ghost-{{comment_id}}"; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+                };
+                (function () { // DON'T EDIT BELOW THIS LINE
+                    var d = document, s = d.createElement('script');
+                    s.src = 'https://www-bahikhata-org.disqus.com/embed.js';
+                    s.setAttribute('data-timestamp', +new Date());
+                    (d.head || d.body).appendChild(s);
+                })();
+            </script>
+            <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered
+                    by Disqus.</a>
+            </noscript>
+        </Section> --}}
+        <!-- Comments END -->
+    </div>
+    </article>
+
+    {{!-- A Subscribe call to action is displayed here, unless viewed as a logged-in member --}}
+    {{#unless @member}}
+    <div class="post-signup-section mb-5 w-adjust bg-danger bg-opacity-10">
+        <h3 class="text-center ">Never Miss an Article!</h3>
+        <h5 class="text-center ">Get Access to our Posts as Email Newsletter. Subscribe us now !</h5>
+        <div class="offset-md-4 col-md-4 text-center subscribe-btn-d">
+            <a class="btn btn-danger" href="#/portal">Yes, I'm In!</a>
+        </div>
+    </div>
+    {{/unless}}
+
+
+    {{!-- Read more links, just above the footer --}}
+
+    {{!-- The {#get} helper below fetches some of the latest posts here
+    so that people have something else to read when they finish this one.
+
+    This query gets the latest 2 posts on the site, but adds a filter to
+    exclude the post we're currently on from being included. --}}
+
+    <div class="mb-5 mx-4">
+        <div class="row">
+            {{!-- <div>tags---{{tags}}</div>
+            <div>tag 3---{{tags.[2].slug}}</div>
+            <div>primary tag---{{primary_tag.name}}</div> --}}
+            <hr class="my-5">
+            {{!-- <div class="fs-1 fw-bold mb-3">More Posts</div> --}}
+            {{#get "posts" filter="tags:[{{primary_tag.slug}},{{tags.[1].slug}},{{tags.[2].slug}}]+id:-{{id}}" limit="2"
+            as |more_posts|}}
+            {{!-- If related posts are two --}}
+            {{#match more_posts.length ">" 1}}
+            {{#foreach more_posts}}
+            <div class="col-md-6">
+                {{> "post-card"}}
+            </div>
+            {{/foreach}}
+
+
+            {{else}}
+            {{!-- If related post is only one --}}
+            {{#match more_posts.length "=" 1}}
+            {{#foreach more_posts}}
+            <div class="col-md-6">
+                {{> "post-card"}}
+            </div>
+            {{/foreach}}
+            {{#get "posts" limit="1" as |more_posts_else_one|}}
+            {{#foreach more_posts_else_one}}
+            <div class="col-md-6">
+                {{!-- <div><b>fetch2</b></div> --}}
+                {{> "post-card"}}
+            </div>
+            {{/foreach}}
+            {{/get}}
+
+
+            {{else}}
+            {{!-- If no posts found then show any posts --}}
+            {{#get "posts" limit="2" as |more_posts_else_one|}}
+            {{#foreach more_posts_else_one}}
+            <div class="col-md-6">
+                {{!-- <div><b>fetch2</b></div> --}}
+                {{> "post-card"}}
+            </div>
+            {{/foreach}}
+            {{/get}}
+            {{/match}}
+
+            {{/match}}
+            {{/get}}
+        </div>
+        <div class="row mt-4 justify-content-center align-content-center">
+                <a href="{{@site.url}}/insights/" class="btn btn-danger w-auto">View All</a>
+        </div>
+    </div>
+
+    {{/post}}

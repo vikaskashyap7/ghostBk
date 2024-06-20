@@ -1,0 +1,42 @@
+{{!-- This is a partial file used to generate a post "card"
+which templates loop over to generate a list of posts. --}}
+
+{{!-- This post card is used in more posts section of Insights Page --}}
+
+<article class="card insight-post">
+  <div class="row">
+    <div class="col-md-12">
+      {{#if feature_image}}
+        <img class="featured-image w-100"
+            srcset="{{img_url feature_image size="s"}} 300w,
+                    {{img_url feature_image size="m"}} 600w,
+                    {{img_url feature_image size="l"}} 1000w,
+                    {{img_url feature_image size="xl"}} 2000w"
+            sizes="(max-width: 1000px) 400px, 800px"
+            src="{{img_url feature_image size="l"}}"
+            alt="{{#if feature_image_alt}}{{feature_image_alt}}{{else}}{{title}}{{/if}}"
+            loading="lazy"
+        />
+      {{/if}}
+
+        <div class="insight-content">
+          <a class="featured-link" href="{{url}}">
+            <header class="post-header">
+              <h3><b>{{title}}</b></h3>
+            </header>
+            <section class="">
+              <p class="">{{excerpt characters="100"}}</p><i><small>Read More ..</small></i>
+            </section>
+          </a>
+          <div class="row insight-post-footer">
+            <div class="col-md-6 position-relative">
+              <span class="author position-absolute bottom-0">{{#has author="count:>2"}}Multiple authors{{else}}{{authors}}{{/has}}</span>
+            </div>
+            <div class="col-md-6 post-author text-end">
+              <span class="post-time"><br><time datetime="{{date format="YYYY-MM-DD"}}">{{date}}</time></span>
+            </div>
+          </div>
+        </div>
+    </div>
+  </div>
+</article>

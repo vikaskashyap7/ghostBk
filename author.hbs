@@ -1,0 +1,78 @@
+{{!-- This Page is of author's profile --}}
+
+{{!< default}}
+{{!-- The tag above means - insert everything in this file into the {body} of the default.hbs template --}}
+
+
+<section class="outer">
+    <div class="inner posts">
+
+        <div class="author-profile d-flex justify-content-around text-center">
+            {{#author}}
+            {{!-- Everything inside the #author tags pulls data from the author --}}
+
+
+
+{{!-- Author Bio --}}
+            <div class="author-profile-content mt-100">
+
+                {{#if profile_image}}
+                <img class="author-profile-pic mx-auto mt-5 mb-2" src="{{profile_image}}" alt="{{name}}" />
+                {{else}}
+                {{!-- <span class="author-profile-pic"> --}}
+                <i class="bi bi-person-circle author-profile-pic mx-auto mt-5 mb-2"></i>
+                {{!-- </span> --}}
+                {{/if}}
+
+                <h1>{{name}}</h1>
+                <p>
+                    {{#if bio}}
+                        {{bio}}
+                    {{else}}
+                        {{plural ../pagination.total empty='No posts' singular='% post' plural='% posts'}} published
+                    {{/if}}
+                </p>
+
+                <div class="author-profile-meta justify-content-around">
+                    <div class="meta-data-container">
+                    {{#if location}}
+                    <div class="author-profile-social-link mx-2 text-decoration-none"><i class="bi bi-geo-alt"></i> {{location}}</div>
+                    {{/if}}
+                    {{#if website}}
+                    <span><a class="author-profile-social-link mx-2 text-decoration-none" href="{{website}}" target="_blank" rel="noopener"><i class="bi bi-globe"></i>
+                    </a></span>
+                    {{/if}}
+                    {{#if twitter}}
+                    <span><a class="author-profile-social-link mx-2 text-decoration-none" href="{{twitter_url}}" target="_blank" rel="noopener">
+                        <i class="bi bi-twitter"></i>
+                    </a></span>
+                    {{/if}}
+                    {{#if facebook}}
+                    <span><a class="author-profile-social-link mx-2 text-decoration-none" href="{{facebook_url}}" target="_blank" rel="noopener">
+                        <i class="bi bi-facebook"></i>
+                    </a></span>
+                    {{/if}}
+                    </div>
+                </div>
+
+            </div>
+{{!-- //Author Bio --}}
+
+
+            {{/author}}
+        </div>
+
+
+{{!-- Posts published by the author --}}
+    {{#author}}<h3 class="mt-5 mb-md-3">Posts by {{name}}:</h3>{{/author}}
+        <div class="row">
+            {{#foreach posts}}
+                {{!-- The tag below includes the markup for each post - partials/post-card.hbs --}}
+                <div class="col-12 col-md-6 col-lg-4">
+                    {{> "post-card"}}
+                </div>
+            {{/foreach}}
+        </div>
+
+    </div>
+</section>

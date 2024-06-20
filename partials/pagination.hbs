@@ -1,0 +1,26 @@
+{{!-- <nav class="pagination is-medium" role="navigation" aria-label="pagination">
+    {{#if prev}}
+    <a href="{{page url prev}}" class="pagination-next"> Newer Posts </a>
+    {{/if}}
+    <span class="pagination-link is-current">Page {{page}} of {{pages}} </span>
+    {{#if next}}
+    <a href="{{page_url next}}" class="pagination-previous"> Older Posts </a>
+    {{/if}}
+</nav> --}}
+{{!-- this is default pagination --}}
+
+<nav class="pagination justify-content-center mb-4" role="navigation">
+    {{#if prev}}
+        <a class="newer-posts me-3 btn btn-danger btn-sm" title="First Page" href="{{page_url 1}}"><i class="bi bi-chevron-double-left"></i></a>
+    {{/if}}
+    {{#if prev}}
+        <a class="newer-posts me-3 btn btn-danger btn-sm" title="Prev Page" href="{{page_url prev}}"><i class="bi bi-chevron-left"></i></a>
+    {{/if}}
+    <span class="page-number my-auto fw-bold fs-small">Page {{page}} of {{pages}}</span>
+    {{#if next}}
+        <a class="older-posts ms-3 btn btn-danger btn-sm" title="Next Page" href="{{page_url next}}"><i class="bi bi-chevron-right"></i></a>
+    {{/if}}
+    {{#if next}}
+        <a class="older-posts ms-3 btn btn-danger btn-sm" title="Last Page" href="{{page_url pages}}"><i class="bi bi-chevron-double-right"></i></a>
+    {{/if}}
+</nav>

@@ -1,0 +1,80 @@
+{{!-- This is a partial file used to generate a post "card"
+which templates loop over to generate a list of posts. --}}
+
+{{! post-card {{post_class}}
+{{! {{#unless feature_image}}
+{{! no-image{{/unless}}
+
+<article class="card">
+    {{#if feature_image}}
+    <a href="{{url}}">
+      <img class="post_feature_image card-img-top post-card-image shadow"
+          srcset="{{img_url feature_image size="s"}} 300w,
+                  {{img_url feature_image size="m"}} 600w,
+                  {{img_url feature_image size="l"}} 1000w,
+                  {{img_url feature_image size="xl"}} 2000w"
+          sizes="(max-width: 1000px) 400px, 800px"
+          src="{{img_url feature_image size="l"}}"
+          alt="{{#if feature_image_alt}}{{feature_image_alt}}{{else}}{{title}}{{/if}}"
+          loading="lazy"
+      />
+    </a>
+    {{/if}}
+    <div class="card-body">
+        <a class="post-card-content-link text-decoration-none text-dark" href="{{url}}">
+            <header class="post-card-header">
+                <h5 class="card-title"><b>{{title}}</b></h5>
+            </header>
+            {{!-- {{#if primary_tag}}
+                {{#primary_tag}}
+                <div class="post-card-primary-tag">{{name}}</div>
+                {{/primary_tag}}
+            {{/if}} --}}
+            <a href={{url}} class="text-danger text-decoration-none"><b>Read More &nbsp;&nbsp;  <span class="fa-solid fa-arrow-right-long" /></b></a>
+        </a>
+    </div>
+</article>
+
+<!--
+<article class="post-card {{post_class}}">
+
+    {{#if feature_image}}
+    <a class="post-card-image-link"
+      href="{{url}}">
+        {{!-- This is a responsive image, it loads different sizes depending on device
+        https://medium.freecodecamp.org/a-guide-to-responsive-images-with-ready-to-use-templates-c400bd65c433 --}}
+        <img class="post_feature_image card-img-top post-card-image"
+            src="{{img_url feature_image size="l"}}"
+            alt="{{#if feature_image_alt}}{{feature_image_alt}}{{else}}{{title}}{{/if}}"
+            loading="lazy"
+        >
+    </a>
+    {{/if}}
+
+    <div class="card-body">
+        <div class="post-card-content">
+            <a class="post-card-content-link" href="{{url}}">
+                <header class="post-card-header">
+                    {{#if primary_tag}}
+                        {{#primary_tag}}
+                        <div class="post-card-primary-tag">{{name}}</div>
+                        {{/primary_tag}}
+                    {{/if}}
+                    <h5 class="card-title">
+                      <strong>{{title}}</strong>
+                    </h5>
+                </header>
+                <p class="card-text post-card-description">{{excerpt characters="80"}}</p>
+            </a>
+
+            <footer class="post-card-meta mt-2 text-right">
+                <div class="post-card-byline-content">
+                    <span>{{#has author="count:>1"}}Multiple authors{{else}}{{authors}}{{/has}}</span>
+                    <span class="post-card-byline-date"><i><time datetime="{{date format="YYYY-MM-DD"}}">{{date}}</time></i></span>
+                </div>
+            </footer>
+
+        </div>
+        {{!--/.post-card-content--}}
+    </div>
+</article>-->
