@@ -21,20 +21,13 @@
                         href="{{url absolute=" true"}}" title="{{label}}">{{label}}</a>
                 </li>
                 {{/foreach}}
-                <li class="nav-item mx-2 mt-2 mt-lg-0 btn-group ms-auto">
-                    <button type="button" class="btn btn-outline-danger dropdown-toggle dropstart" data-bs-toggle="dropdown"
-                        aria-expanded="false" id="lang_dropdown">
-                        {{#is "#page,insights,post,tag"}}
-                        English
-                        {{else}}
-                        {{#is "#page,insights,post,tag"}}English{{else}}हिंदी{{/is}}
-                        {{/is}}
-                    </button>
-                    <ul class="dropdown-menu">
-                        <li><a class="dropdown-item btn-red" href="/insights/">English</a></li>
-                        <li><a class="dropdown-item btn-red" href="/hi/insights/">हिंदी</a></li>
-                    </ul>
-                </li>
+                
+                <div class="nav-item mx-2 mt-2 mt-lg-0 btn-group ms-auto " id="lang_dropdown">
+                    <select id="language-filter" class="form-select" onchange="filterByLanguage(this.value)">
+                        <option class="dropdown-item btn-red" value="english" selected>English</option>
+                         <option class="dropdown-item btn-red" value="hindi">हिंदी</option>
+                    </select>
+                </div>
                 <li class="nav-item mx-2 mt-2 mt-lg-0">
                     <a target="_blank" href="https://play.google.com/store/apps/details?id=com.bahikhata"
                         class="btn btn-danger" role="button">Download App</a>

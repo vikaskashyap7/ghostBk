@@ -28,8 +28,9 @@
 </head>
 
 <body class="{{body_class}} font-family-opensans">
-    <div class="viewport">
 
+    <div class="viewport">
+         
         <header class="header">
             {{#is "home"}}
                 {{navigation}}
@@ -56,10 +57,11 @@
         crossorigin="anonymous"></script>
     <script src="https://kit.fontawesome.com/297aaac7f4.js" crossorigin="anonymous"></script>
     <script src="{{asset "built/script.js"}}"></script>
-    <script src="{{asset "js/language-switcher.js"}}"></script>
+    {{!-- <script src="{{asset "js/language-switcher.js"}}"></script> --}}
 
     {{!-- Ghost outputs required functional scripts with this tag - it should always be the last thing before the
     closing body tag --}}
+    
     {{ghost_foot}}
 
 </body>

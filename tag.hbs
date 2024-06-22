@@ -2,22 +2,8 @@
     --}} 
     <section class="outer">
     <div class="inner posts">
-        {{!-- <div>
-            <li class="nav-item mx-2 mt-2 mt-lg-0 btn-group ms-auto">
-                    <button type="button" class="btn btn-outline-danger dropdown-toggle dropstart" data-bs-toggle="dropdown"
-                        aria-expanded="false" id="lang_dropdown">
-                        {{#is "#page,insights,post,tag"}}
-                         Select Language
-                        {{else}}
-                        {{#is "tags"}}हिंदी{{else}}English {{/is}}
-                        {{/is}}
-                    </button>
-                    <ul class="dropdown-menu">
-                        <li><a class="dropdown-item btn-red" href="/tags/flag/">English</a></li>
-                        <li><a class="dropdown-item btn-red" href="/tags/">हिंदी</a></li>
-                    </ul>
-                </li>
-        </div> --}}
+        
+    
         <div class="mt-5">
 
             {{#tag}}
@@ -59,15 +45,60 @@
                 {{#foreach posts }}
 
                 {{!-- The tag below includes the markup for each post - partials/post-card.hbs --}}
-                <div class="col-12 col-md-6 col-lg-4 post" data-lang="{{language}}" >
+                <div class="col-12 col-md-6 col-lg-4 post"  data-lang="{{#foreach tags}}{{slug}} {{/foreach}}">
                     {{> "post-card"}}
                 </div>
 
                 {{/foreach}}
                 {{pagination}}
             </div>
+            
 
         </div>
     </div>
     </section>
+
+
+<script>
+    function filterByLanguage(language) {
+        let posts = document.querySelectorAll('.post');
+        posts.forEach(post => {
+            const postTags = post.getAttribute('data-lang');
+            if (language === "hindi" || postTags.includes(language)) {
+                post.style.display = "block";
+            } else {
+                post.style.display = "none";
+            }
+        });
+
+        // Store selected language in local storage to retain the filter across navigation
+        localStorage.setItem('selectedLanguage', language);
+    }
+
+    // Apply the default or stored filter on page load
+    document.addEventListener("DOMContentLoaded", function() {
+        const storedLanguage = localStorage.getItem('selectedLanguage') || 'english';
+        document.getElementById('language-filter').value = storedLanguage;
+        filterByLanguage(storedLanguage);
+    });
+</script>
+
+
+
+    {{!-- <script>
+    function filterByLanguage(language) {
+        let posts = document.querySelectorAll('.post');
+        posts.forEach(post => {
+            const postTags = post.getAttribute('data-lang');
+            if (language === "" || postTags.includes(language)) {
+                post.style.display = "block";
+            } else {
+                post.style.display = "none";
+            }
+        });
+    }  
+</script> --}}
  
+
+ {{!-- data-lang="{{language}}" --}}
+  {{!-- data-lang="{{tags.[0].slug}}" --}}
